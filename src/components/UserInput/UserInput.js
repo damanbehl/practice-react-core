@@ -1,6 +1,7 @@
 // import Card from "../UI/Card";
 import { useState } from "react";
 import styles from "./UserInput.module.css";
+import Button from "../UI/Button";
 
 const UserInput = (props) => {
   const [enteredName, setEnteredName] = useState("");
@@ -52,7 +53,7 @@ const UserInput = (props) => {
         </div>
       </div>
       <div className={styles["new-user"]}>
-        <button type="submit">Submit</button>
+        <Button type="submit">Submit</Button>
       </div>
     </form>
   );
