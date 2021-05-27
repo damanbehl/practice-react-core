@@ -7,15 +7,21 @@ const UserInput = (props) => {
   const [enteredAge, setEnteredAge] = useState("");
   const submitHandler = (event) => {
     event.preventDefault();
-    // if(enteredName.trim().length==0){
-
-    // }
+    if (enteredName.trim().length === 0) {
+      props.onInvalidInput("You didn't enter a name");
+      return;
+    } else if (enteredAge <= 0) {
+      props.onInvalidInput("Entered age cannot be zero or negative");
+      return;
+    }
     const userData = {
       name: enteredName,
       age: enteredAge,
     };
     console.log("inside submit handler");
     props.onAddUser(userData);
+    setEnteredAge("");
+    setEnteredName("");
   };
   const nameChangeHandler = (event) => {
     setEnteredName(event.target.value);
@@ -30,6 +36,7 @@ const UserInput = (props) => {
           <label>Username:</label>
           <input
             type="text"
+            value={enteredName}
             onChange={nameChangeHandler}
             placeholder="please enter your name"
           />
@@ -38,6 +45,7 @@ const UserInput = (props) => {
           <label>Age:</label>
           <input
             type="number"
+            value={enteredAge}
             onChange={ageChangeHandler}
             placeholder="please enter your age"
           />
