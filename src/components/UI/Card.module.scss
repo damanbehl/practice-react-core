@@ -1,0 +1,32 @@
+.card {
+  padding: 20px 20px 20px 20px;
+  background: #e2e7ee;
+  --background: #ffffff;
+  --text: black;
+  position: relative;
+  height: 12rem;
+  box-shadow: 0 0 2rem -1rem rgba(0, 0, 0, 0.05);
+  min-width: 300px;
+  max-width: 500px;
+  min-height: fit-content;
+  border-radius: 5px;
+  margin-top: 10%;
+  margin-left: 35%;
+  margin-bottom: auto;
+  align-content: center;
+
+  .container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 1rem;
+    background: var(--background);
+    color: var(--text);
+  }
+  &:hover .multi-button,
+  .multi-button:focus-within {
+    //Hover or a button inside is focused
+    width: 10rem;
+    height: 10rem;
+  }
+}
