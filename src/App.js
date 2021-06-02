@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import UserInput from "./components/UserInput/UserInput";
 import UserList from "./components/UserList/UserList";
-import Modal from "./components/UI/Modal";
+// import Modal from "./components/UI/Modal";
+import NewModal from "./components/UI/NewModal";
 
 function App() {
   const [userList, setUserList] = useState([]);
@@ -15,7 +16,7 @@ function App() {
 
   const invalidInputHandler = (message) => {
     setIsInputValid(false);
-    setModalText(message);
+    setModalText({ message: message, title: "oops! an error" });
   };
 
   const closeModalHandler = (message) => {
@@ -25,9 +26,10 @@ function App() {
 
   return (
     <div>
-      <Modal
+      <NewModal
         showModal={!isInputValid}
-        text={modalText}
+        text={modalText.message}
+        title={modalText.title}
         onClose={closeModalHandler}
       />
       <UserInput

@@ -11,15 +11,19 @@ const UserInput = (props) => {
     if (enteredName.trim().length === 0) {
       props.onInvalidInput("You didn't enter a name");
       return;
-    } else if (enteredAge <= 0) {
-      props.onInvalidInput("Entered age cannot be zero or negative");
+    }
+    if (+enteredAge.trim() < 1 || enteredAge.trim().length === 0) {
+      let errorMessage = !enteredAge.trim().length
+        ? "please enter age"
+        : "age cannot be  negative";
+      props.onInvalidInput(errorMessage);
       return;
     }
     const userData = {
       name: enteredName,
-      age: enteredAge,
+      age: +enteredAge.trim(),
     };
-    console.log("inside submit handler");
+    console.log("inside submit handler\t" + userData);
     props.onAddUser(userData);
     setEnteredAge("");
     setEnteredName("");
