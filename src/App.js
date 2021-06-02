@@ -3,6 +3,7 @@ import UserInput from "./components/UserInput/UserInput";
 import UserList from "./components/UserList/UserList";
 // import Modal from "./components/UI/Modal";
 import NewModal from "./components/UI/NewModal";
+import Wrapper from "./components/Helper/Wrapper";
 
 function App() {
   const [userList, setUserList] = useState([]);
@@ -25,7 +26,8 @@ function App() {
   };
 
   return (
-    <div>
+    // <div>
+    <Wrapper>
       <NewModal
         showModal={!isInputValid}
         text={modalText.message}
@@ -37,7 +39,8 @@ function App() {
         onInvalidInput={invalidInputHandler}
       />
       {userList.length > 0 && <UserList items={userList} />}
-    </div>
+    </Wrapper>
+    // </div>
   );
 }
 
