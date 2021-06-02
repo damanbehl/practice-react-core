@@ -27,7 +27,7 @@ function App() {
 
   return (
     // <div>
-    <Wrapper>
+    <>
       <NewModal
         showModal={!isInputValid}
         text={modalText.message}
@@ -39,7 +39,7 @@ function App() {
         onInvalidInput={invalidInputHandler}
       />
       {userList.length > 0 && <UserList items={userList} />}
-    </Wrapper>
+    </>
     // </div>
   );
 }
