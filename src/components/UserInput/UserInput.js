@@ -1,58 +1,54 @@
 // import Card from "../UI/Card";
-import { useState } from "react";
+import { useRef } from "react";
 import styles from "./UserInput.module.css";
 import Button from "../UI/Button";
 
 const UserInput = (props) => {
-  const [enteredName, setEnteredName] = useState("");
-  const [enteredAge, setEnteredAge] = useState("");
+  const nameInputRef = useRef();
+  const ageInputRef = useRef();
   const submitHandler = (event) => {
     event.preventDefault();
-    if (enteredName.trim().length === 0) {
+    const nameEntered = nameInputRef.current.value;
+    const ageEntered = ageInputRef.current.value;
+    if (nameEntered.trim().length === 0) {
       props.onInvalidInput("You didn't enter a name");
       return;
     }
-    if (+enteredAge.trim() < 1 || enteredAge.trim().length === 0) {
-      let errorMessage = !enteredAge.trim().length
+    if (+ageEntered.trim() < 1 || ageEntered.trim().length === 0) {
+      let errorMessage = !ageEntered.trim().length
         ? "please enter age"
         : "age cannot be  negative";
       props.onInvalidInput(errorMessage);
       return;
     }
     const userData = {
-      name: enteredName,
-      age: +enteredAge.trim(),
+      name: nameEntered,
+      age: +ageEntered.trim(),
     };
     console.log("inside submit handler\t" + userData);
     props.onAddUser(userData);
-    setEnteredAge("");
-    setEnteredName("");
+    //resetting the form
+    nameInputRef.current.value = "";
+    ageInputRef.current.value = "";
   };
-  const nameChangeHandler = (event) => {
-    setEnteredName(event.target.value);
-  };
-  const ageChangeHandler = (event) => {
-    setEnteredAge(event.target.value);
-  };
+
   return (
     <form onSubmit={submitHandler} className={styles["user-input__form"]}>
       <div className={styles["user-input__controls"]}>
         <div className={styles["user-input__control"]}>
-          <label>Username:</label>
+          <label htmlFor="username">Username:</label>
           <input
             type="text"
-            value={enteredName}
-            onChange={nameChangeHandler}
             placeholder="please enter your name"
+            ref={nameInputRef}
           />
         </div>
         <div className={styles["user-input__control"]}>
-          <label>Age:</label>
+          <label htmlFor="age">Age:</label>
           <input
             type="number"
-            value={enteredAge}
-            onChange={ageChangeHandler}
             placeholder="please enter your age"
+            ref={ageInputRef}
           />
         </div>
       </div>
